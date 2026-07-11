@@ -1,0 +1,17 @@
+erDiagram
+    VENUE ||--o{ EVENT : hosts
+    VENUE {
+        int id PK
+        string name
+        string category
+        string description
+        string node_id
+    }
+    EVENT {
+        int id PK
+        string title
+        string description
+        datetime starts_at
+        datetime ends_at
+        int venue_id FK
+    }

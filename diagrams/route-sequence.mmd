@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant U as User
+    participant P as Portal page
+    participant A as REST API
+    participant G as Campus graph
+    U->>P: Tap "Navigate" on an event
+    P->>A: GET /api/route?to={venue}&from=gate
+    A->>G: shortest_path(gate, venue_node)
+    G-->>A: ordered waypoints + distance
+    A-->>P: JSON { waypoints, distance_m }
+    P->>P: Draw polyline, fit bounds
+    P-->>U: Route shown + distance in toast

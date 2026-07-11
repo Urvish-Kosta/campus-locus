@@ -1,0 +1,19 @@
+flowchart LR
+    subgraph Device["User device (browser)"]
+        UI["Portal page<br/>Leaflet map + event board"]
+        SW["Service worker<br/>(cache + notifications)"]
+    end
+    subgraph Gateway["Wi-Fi gateway"]
+        CP["Captive-portal redirect"]
+    end
+    subgraph Server["Campus Locus server (Flask)"]
+        API["REST API"]
+        WF["Wayfinding (Dijkstra)"]
+        DB[("SQLite: venues + events")]
+    end
+    Device -- "joins network" --> CP
+    CP -- "302 redirect" --> UI
+    UI -- "GET /api/*" --> API
+    API --> DB
+    API --> WF
+    SW -. "showNotification()" .-> UI
