@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#12203A" />
+  <title>Campus Locus — Live Campus Map &amp; Events</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <!-- Captive-portal context bar: honest about how the user got here -->
+  <header class="portal-bar" role="banner">
+    <span class="portal-bar__dot" aria-hidden="true"></span>
+    <span class="portal-bar__net">Campus Guest Wi-Fi</span>
+    <span class="portal-bar__sep">·</span>
+    <span class="portal-bar__hint">You're connected. Here's what's happening on campus.</span>
+  </header>
+
+  <main class="app">
+    <section class="masthead">
+      <p class="masthead__eyebrow">Campus Locus</p>
+      <h1 class="masthead__title">Find your way. Catch what's live.</h1>
+    </section>
+
+    <!-- Hero: the interactive campus map -->
+    <section class="map-panel" aria-label="Campus map">
+      <div id="map" class="map"></div>
+      <div class="map-legend" aria-hidden="true">
+        <span class="chip chip--live">Live now</span>
+        <span class="chip chip--soon">Upcoming</span>
+        <span class="chip chip--route">Your route</span>
+      </div>
+      <button id="clear-route" class="map-clear" hidden>Clear route</button>
+    </section>
+
+    <!-- Live board -->
+    <section class="board" aria-label="Events">
+      <div class="board__head">
+        <h2 class="board__title">On campus today</h2>
+        <button id="notify-toggle" class="notify-btn" type="button">
+          Notify me
+        </button>
+      </div>
+      <ul id="event-list" class="event-list" aria-live="polite">
+        <li class="event-empty">Loading events…</li>
+      </ul>
+    </section>
+
+    <footer class="app-foot">
+      <span>Campus Locus</span>
+      <span class="app-foot__muted">Map layout is illustrative, for demonstration.</span>
+    </footer>
+  </main>
+
+  <!-- In-page notification toast (fallback + confirmation) -->
+  <div id="toast" class="toast" role="status" aria-live="assertive" hidden>
+    <div class="toast__body">
+      <p class="toast__title" id="toast-title"></p>
+      <p class="toast__text" id="toast-text"></p>
+    </div>
+    <button class="toast__close" id="toast-close" aria-label="Dismiss">×</button>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+  <script src="/assets/map.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
